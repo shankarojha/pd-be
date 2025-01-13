@@ -1,0 +1,41 @@
+http:
+  port: 8005
+
+admin:
+  port: 9876
+  host: localhost
+
+logLevel: debug # Ensure this is at the root level
+
+apiEndpoints:
+  userApi:
+    host: localhost
+    paths: ["/api/users", /api/users/*"]
+
+serviceEndpoints:
+  userService:
+    url: "http://localhost:3001"
+
+policies:
+  - cors
+  - proxy
+
+pipelines:
+  default:
+    apiEndpoints:
+      - userApi
+    policies:
+      - cors:
+          action:
+            origin: ["*"]
+            methods:
+              - HEAD
+              - PUT
+              - POST
+              - DELETE
+              - PATCH
+            credentials: true
+
+      - proxy:
+          - action:
+              serviceEndpoint: userService
