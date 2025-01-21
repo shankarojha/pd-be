@@ -8,9 +8,7 @@ const generateToken = async(user, secretKey=process.env.jwt_secret_key) =>{
 }
 
 const verifyToken = (req,res,next) =>{
-    const authHeaders = req.headers['authorization'];
-    console.log(authHeaders)
-    const token = authHeaders && authHeaders.split(' ')[1];
+    const token = req.headers['authorization'];
 
     if(!token){
         const response = globalResponse(401, 'token not provided', "token not provided", null)

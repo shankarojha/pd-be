@@ -2,18 +2,6 @@ const User = require("../models/user");
 const { globalResponse } = require("../middlewares/globalResponse");
 const argon2 = require("argon2");
 const { generateToken } = require("../middlewares/authorization");
-const test = async (req, res) => {
-  res.status(200).json([
-    {
-      user: "test",
-      pass: "one",
-    },
-    {
-      user: "test2",
-      pass: "two",
-    },
-  ]);
-};
 
 const register = async (req, res) => {
   try {
@@ -97,7 +85,6 @@ const login = async (req, res) => {
 };
 
 module.exports = {
-  test,
   register,
   login,
 };
