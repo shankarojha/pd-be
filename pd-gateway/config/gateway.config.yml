@@ -10,7 +10,7 @@ logLevel: debug # Ensure this is at the root level
 apiEndpoints:
   userApi:
     host: localhost
-    paths: ["/api/users", /api/users/*"]
+    paths: ["/api/users/*", "/api/users"]
 
 serviceEndpoints:
   userService:

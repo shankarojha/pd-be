@@ -10,4 +10,4 @@ module.exports.wrongEndpoint = (err, req, res, next) => {
           message: err.message || 'Internal Server Error',
         },
       });
-  }
+  } 

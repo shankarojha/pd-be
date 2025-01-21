@@ -4,7 +4,8 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const cors = require('cors')
 const userRoutes = require("./routes/userRoutes");
-const errorHandler= require('./middlewares/errorHandler')
+const errorHandler= require('./middlewares/errorHandler');
+const { verifyToken } = require("./middlewares/authorization");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
@@ -16,7 +17,6 @@ app.use(cors({
 app.use("/api/users", userRoutes);
 app.use(errorHandler.wrongEndpoint);
 app.use(errorHandler.globalErorHandler);
-
 
 mongoose
   .connect(`mongodb://localhost:27017/${process.env.user_db}`, {
