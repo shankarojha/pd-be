@@ -9,7 +9,7 @@ const { verifyToken } = require("./middlewares/authorization");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin:'*',
+  origin:'http://localhost:4200',
   methods:['GET', 'PUT', 'POST', 'DELETE', 'PATCH', 'HEAD'],
   credentials:true
 }))

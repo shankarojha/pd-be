@@ -27,7 +27,7 @@ pipelines:
     policies:
       - cors:
           action:
-            origin: ["*"]
+            origin: ["http://localhost:4200"]
             methods:
               - HEAD
               - PUT
@@ -35,6 +35,9 @@ pipelines:
               - DELETE
               - PATCH
             credentials: true
+            headers: ["Authorization", "Content-Type", "Accept"]
+            exposeHeaders: ["Authorization", "Content-Type"]
+
 
       - proxy:
           - action:

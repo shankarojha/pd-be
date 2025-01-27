@@ -2,7 +2,7 @@ const User = require("../models/user");
 const { globalResponse } = require("../middlewares/globalResponse");
 const argon2 = require("argon2");
 const { generateToken } = require("../middlewares/authorization");
-
+const { createUserId } = require("../utils/utils")
 const register = async (req, res) => {
   try {
     const {
@@ -15,8 +15,12 @@ const register = async (req, res) => {
       userType,
       password,
     } = req.body;
+    const findLastUser = await User.findOne().sort({createdOn:-1})
+    const lastUserId = findLastUser?.userId || 'PDUSR0000000'
+    const newUserId = await createUserId(lastUserId)
     const hashedPassword = await argon2.hash(password); // generating hash
     const newUser = new User({
+      userId:newUserId,
       name,
       email,
       phoneNumber,
