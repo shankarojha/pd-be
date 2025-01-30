@@ -1,0 +1,26 @@
+const jwt = require('jsonwebtoken')
+const {globalResponse} = require('./globalResponse')
+require("dotenv").config();
+
+const verifyToken = (req,res,next) =>{
+    const token = req.headers['authorization'];
+
+    if(!token){
+        const response = globalResponse(401, 'token not provided', "token not provided", null)
+        return res.json(response)
+    }
+        jwt.verify(token, process.env.jwt_secret_key, (err, decoded)=>{
+            if(err){
+                const response = globalResponse(401, 'token incorrect', err, null)
+                res.json(response)
+            }else{
+                req.user = decoded;
+                next();
+            }
+        })
+    
+}
+
+module.exports={
+    verifyToken
+}
